@@ -1,20 +1,44 @@
-<p>{{pageTitle}}</p>
-
-<div>
-    <input [(ngModel)]="titleInput" type="text" placeholder="Enter appointment title" #title />
-    <input [(ngModel)]="dateInput" type="date" placeholder="Enter appointment date" #date />
-    <button (click)="addAppointment()">Add</button>
+<div class="card-header text-center shadow-sm p-5 mb-2">
+    <h3>{{pageTitle}}</h3>
 </div>
+<div class="card-body">
 
-<div *ngIf="!appointments.length">
-    <p>No appointments found</p>
-</div>
+    <div class="row mt-2">
+        <div class="col-md-6 pt-2">
+            <input [(ngModel)]="titleInput" type="text" class="form-control" placeholder="Enter appointment title"
+                #title />
+        </div>
+        <div class="col-md-4 pt-2">
+            <input [(ngModel)]="dateInput" type="date" class="form-control" placeholder="Enter appointment date"
+                #date />
+        </div>
+        <div class="col-md-2 pt-2">
+            <button (click)="addAppointment()" class="btn btn-primary" style="width: 100%;">Add</button>
+        </div>
+    </div>
 
-<div *ngIf="appointments.length">
-    <ul>
-        <li *ngFor="let appointment of appointments; let i = index">
-            <p>Title: {{appointment.title}} | Date: {{appointment.date | date:'yyyy/MM/dd'}}</p>
-            <button (click)="deleteAppointment(i)">Delete</button>
-        </li>
-    </ul>
+    <div *ngIf="!appointments.length" class="alert alert-secondary text-center mt-2 shadow-sm">
+        <p>No appointments found</p>
+    </div>
+
+    <div *ngIf="appointments.length">
+        <ul class="list-group mt-2">
+            <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-2"
+                *ngFor="let appointment of appointments; let i = index">
+                <div class="d-flex gap-2 flex-column">
+                    <div class="d-flex">
+                        <i class="bi bi-pencil me-2"></i>
+                        <span class="me-2" style="font-weight: bold;">{{appointment.title}}</span>
+                    </div>
+                    <div class="d-flex">
+                        <i class="bi bi-calendar me-2"></i>
+                        <span>{{appointment.date | date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </div>
+
+
+                <button (click)="deleteAppointment(i)" class="btn btn-danger">Delete</button>
+            </li>
+        </ul>
+    </div>
 </div>
