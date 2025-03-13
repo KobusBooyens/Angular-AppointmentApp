@@ -1,1 +1,20 @@
-<p>appointment-list works!</p>
+<p>{{pageTitle}}</p>
+
+<div>
+    <input [(ngModel)]="titleInput" type="text" placeholder="Enter appointment title" #title />
+    <input [(ngModel)]="dateInput" type="date" placeholder="Enter appointment date" #date />
+    <button (click)="addAppointment()">Add</button>
+</div>
+
+<div *ngIf="!appointments.length">
+    <p>No appointments found</p>
+</div>
+
+<div *ngIf="appointments.length">
+    <ul>
+        <li *ngFor="let appointment of appointments; let i = index">
+            <p>Title: {{appointment.title}} | Date: {{appointment.date | date:'yyyy/MM/dd'}}</p>
+            <button (click)="deleteAppointment(i)">Delete</button>
+        </li>
+    </ul>
+</div>
